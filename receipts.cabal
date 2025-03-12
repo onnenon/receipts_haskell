@@ -26,9 +26,15 @@ common options
 library riot
   import:          options
   hs-source-dirs:  lib
-  exposed-modules: Riot
+  exposed-modules: 
+    Riot
+    Riot.Client
+    Riot.Config
   build-depends:
     , text                >=2.1.1
+    , http-conduit >= 2.3.9.1
+    , http-client-tls     >=0.3.6.3
+    , http-client >= 0.7.18
 
 executable receipts
   import:         options
@@ -39,6 +45,5 @@ executable receipts
   build-depends:
     , crypton-connection  >=0.4.1
     , receipts:riot
-    , req >=3.13.4
 
   hs-source-dirs: app

@@ -4,11 +4,10 @@
 module Riot where
 
 import Data.Aeson
-import Data.Text (Text)
+import Data.Text qualified as T
 import GHC.Generics (Generic)
-
-riotApiUrl :: Text
-riotApiUrl = "americas.api.riotgames.com"
+import Riot.Client
+import Riot.Config
 
 data PlayerInfo = PlayerInfo
   { gameName :: String,
@@ -22,8 +21,18 @@ instance ToJSON PlayerInfo where
 
 instance FromJSON PlayerInfo
 
+getPlayerInfo :: RiotConfig -> String -> String -> IO (Either String PlayerInfo)
+getPlayerInfo config name tag =
+  do
+    response <-
+      makeRequest config $
+        T.pack $
+          "/riot/account/v1/accounts/by-riot-id/" <> name <> "/" <> tag
+    return $ case response of
+      Left err -> Left err
+      Right body -> case eitherDecode body of
+        Left decodeErr -> Left decodeErr
+        Right playerInfo -> Right playerInfo
+
 -- >>> decode "{\"gameName\":\"koozie\",\"puuid\":\"0000\",\"tagLine\":\"0000\"}" :: Maybe PlayerInfo
 -- Just (PlayerInfo {gameName = "koozie", puuid = "0000", tagLine = "0000"})
-
-getPlayerInfo :: String -> String -> String -> IO (Either PlayerInfo String)
-getPlayerInfo = error "Not implemented"
