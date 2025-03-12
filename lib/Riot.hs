@@ -16,6 +16,7 @@ data PlayerInfo = PlayerInfo
   deriving (Show, Generic)
 
 instance AE.ToJSON PlayerInfo where
+  toEncoding :: PlayerInfo -> AE.Encoding
   toEncoding = AE.genericToEncoding AE.defaultOptions
 
 instance AE.FromJSON PlayerInfo

@@ -10,7 +10,7 @@ data RiotConfig = RiotConfig
 
 -- | Default config with the given API key
 --
--- >>> defaultConfig $ pack "0000"
+-- >>> defaultConfig "0000"
 -- RiotConfig {apiKey = "0000", baseUrl = "americas.api.riotgames.com"}
 defaultConfig :: Text -> RiotConfig
 defaultConfig key =
