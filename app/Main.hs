@@ -16,7 +16,7 @@ main = runReq defaultHttpConfig $ do
     req
       GET
       (https riotApiUrl /: "riot" /: "account" /: "v1" /: "accounts" /: "by-riot-id" /: "koozie" /: "0000")
-      NoReqBody -- use built-in options or add your own
-      jsonResponse -- specify how to interpret response
-      (header "X-Riot-Token" apiKey) -- use built-in options or add your own)
+      NoReqBody
+      jsonResponse
+      (header "X-Riot-Token" apiKey)
   liftIO $ print (responseBody r :: Value)
