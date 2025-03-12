@@ -20,7 +20,7 @@ common options
   default-language: GHC2021
   build-depends:
     , aeson       >=2.2.3.0
-    , base        ^>=4.19.1.0
+    , base        ^>=4.20.0.0
     , bytestring  >=0.12.1.0
 
 library riot
