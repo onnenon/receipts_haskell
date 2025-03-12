@@ -2,11 +2,11 @@
 
 module Riot where
 
-import Data.Aeson
+import Data.Aeson qualified as AE
 import Data.Text (Text)
 import GHC.Generics (Generic)
-import Riot.Client
-import Riot.Config
+import Riot.Client (makeRequest)
+import Riot.Config (RiotConfig)
 
 data PlayerInfo = PlayerInfo
   { gameName :: Text,
@@ -15,10 +15,10 @@ data PlayerInfo = PlayerInfo
   }
   deriving (Show, Generic)
 
-instance ToJSON PlayerInfo where
-  toEncoding = genericToEncoding defaultOptions
+instance AE.ToJSON PlayerInfo where
+  toEncoding = AE.genericToEncoding AE.defaultOptions
 
-instance FromJSON PlayerInfo
+instance AE.FromJSON PlayerInfo
 
 -- | Get player info by name and tag
 --
@@ -30,4 +30,4 @@ getPlayerInfo config name tag =
     response <-
       makeRequest config $
         "/riot/account/v1/accounts/by-riot-id/" <> name <> "/" <> tag
-    return $ response >>= eitherDecode
+    return $ response >>= AE.eitherDecode
