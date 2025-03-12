@@ -3,15 +3,15 @@
 module Riot where
 
 import Data.Aeson
-import Data.Text qualified as T
+import Data.Text (Text)
 import GHC.Generics (Generic)
 import Riot.Client
 import Riot.Config
 
 data PlayerInfo = PlayerInfo
-  { gameName :: String,
-    puuid :: String,
-    tagLine :: String
+  { gameName :: Text,
+    puuid :: Text,
+    tagLine :: Text
   }
   deriving (Show, Generic)
 
@@ -24,15 +24,10 @@ instance FromJSON PlayerInfo
 --
 -- >>> getPlayerInfo (defaultConfig "0000") "koozie" "0000"
 -- Right (PlayerInfo {gameName = "koozie", puuid = "0000", tagLine = "0000"})
-getPlayerInfo :: RiotConfig -> String -> String -> IO (Either String PlayerInfo)
+getPlayerInfo :: RiotConfig -> Text -> Text -> IO (Either String PlayerInfo)
 getPlayerInfo config name tag =
   do
     response <-
       makeRequest config $
-        T.pack $
-          "/riot/account/v1/accounts/by-riot-id/" <> name <> "/" <> tag
-    return $ case response of
-      Left err -> Left err
-      Right body -> case eitherDecode body of
-        Left decodeErr -> Left decodeErr
-        Right playerInfo -> Right playerInfo
+        "/riot/account/v1/accounts/by-riot-id/" <> name <> "/" <> tag
+    return $ response >>= eitherDecode
