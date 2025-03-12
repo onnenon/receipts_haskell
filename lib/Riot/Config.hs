@@ -6,7 +6,12 @@ data RiotConfig = RiotConfig
   { apiKey :: Text,
     baseUrl :: Text
   }
+  deriving (Show)
 
+-- | Default config with the given API key
+--
+-- >>> defaultConfig $ pack "0000"
+-- RiotConfig {apiKey = "0000", baseUrl = "americas.api.riotgames.com"}
 defaultConfig :: Text -> RiotConfig
 defaultConfig key =
   RiotConfig

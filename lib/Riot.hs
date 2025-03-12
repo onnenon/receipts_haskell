@@ -21,6 +21,10 @@ instance ToJSON PlayerInfo where
 
 instance FromJSON PlayerInfo
 
+-- | Get player info by name and tag
+--
+-- >>> getPlayerInfo (defaultConfig "0000") "koozie" "0000"
+-- Right (PlayerInfo {gameName = "koozie", puuid = "0000", tagLine = "0000"})
 getPlayerInfo :: RiotConfig -> String -> String -> IO (Either String PlayerInfo)
 getPlayerInfo config name tag =
   do
