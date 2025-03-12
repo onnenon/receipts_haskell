@@ -37,6 +37,3 @@ getPlayerInfo config name tag =
       Right body -> case eitherDecode body of
         Left decodeErr -> Left decodeErr
         Right playerInfo -> Right playerInfo
-
--- >>> decode "{\"gameName\":\"koozie\",\"puuid\":\"0000\",\"tagLine\":\"0000\"}" :: Maybe PlayerInfo
--- Just (PlayerInfo {gameName = "koozie", puuid = "0000", tagLine = "0000"})
