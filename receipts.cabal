@@ -18,10 +18,7 @@ extra-doc-files: CHANGELOG.md
 common options
   ghc-options:      -Wall
   default-language: GHC2021
-  build-depends:
-    , aeson       >=2.2.3.0
-    , base        ^>=4.20.0.0
-    , bytestring  >=0.12.1.0
+  build-depends:    base ^>=4.20.0.0
 
 library riot
   import:          options
@@ -32,6 +29,8 @@ library riot
     Riot.Config
 
   build-depends:
+    , aeson            >=2.2.3.0
+    , bytestring       >=0.12.1.0
     , http-client      >=0.7.18
     , http-client-tls  >=0.3.6.3
     , http-conduit     >=2.3.9.1
@@ -44,8 +43,7 @@ executable receipts
   -- other-modules:
   -- other-extensions:
   build-depends:
-    , crypton-connection  >=0.4.1
     , receipts:riot
-    , text                >=2.1.1
+    , text           >=2.1.1
 
   hs-source-dirs: app
