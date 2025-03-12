@@ -16,9 +16,10 @@ extra-doc-files: CHANGELOG.md
 -- extra-source-files:
 
 common options
-  ghc-options:      -Wall
-  default-language: GHC2021
-  build-depends:    base ^>=4.20.0.0
+  ghc-options:        -Wall
+  default-language:   GHC2021
+  build-depends:      base ^>=4.20.0.0
+  default-extensions: OverloadedStrings
 
 library riot
   import:          options

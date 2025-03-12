@@ -1,5 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Riot.Client where
 
 import Control.Exception (try)

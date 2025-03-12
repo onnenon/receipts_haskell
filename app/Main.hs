@@ -1,14 +1,14 @@
 module Main where
 
 import Control.Monad.IO.Class (MonadIO (liftIO))
-import Data.Text (pack)
+import Data.Text qualified as T
 import Riot (getPlayerInfo)
 import Riot.Config (defaultConfig)
 import System.Environment (getEnv)
 
 main :: IO ()
 main = do
-  apiKey <- liftIO $ pack <$> getEnv "RIOT_API_KEY"
+  apiKey <- T.pack <$> liftIO (getEnv "RIOT_API_KEY")
   let config = defaultConfig apiKey
   result <- getPlayerInfo config "koozie" "0000"
   case result of
