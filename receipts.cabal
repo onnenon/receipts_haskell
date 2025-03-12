@@ -27,6 +27,8 @@ library riot
   import:          options
   hs-source-dirs:  lib
   exposed-modules: Riot
+  build-depends:
+    , text                >=2.1.1
 
 executable receipts
   import:         options
@@ -36,10 +38,7 @@ executable receipts
   -- other-extensions:
   build-depends:
     , crypton-connection  >=0.4.1
-    , http-client         >=0.7.17
-    , http-client-tls     >=0.3.6.4
-    , http-conduit        >=2.3.9.1
     , receipts:riot
-    , tls                 >=2.1.2
+    , req >=3.13.4
 
   hs-source-dirs: app

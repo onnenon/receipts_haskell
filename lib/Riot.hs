@@ -4,10 +4,11 @@
 module Riot where
 
 import Data.Aeson
+import Data.Text (Text)
 import GHC.Generics (Generic)
 
-riotApiUrl :: String
-riotApiUrl = "https://americas.api.riotgames.com/riot/account/v1/"
+riotApiUrl :: Text
+riotApiUrl = "americas.api.riotgames.com"
 
 data PlayerInfo = PlayerInfo
   { gameName :: String,
