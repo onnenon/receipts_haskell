@@ -26,6 +26,4 @@ makeRequest :: RiotConfig -> Text -> IO (Either String Data.Text.LazyByteString)
 makeRequest config path = do
   request <- buildRequest config path
   response <- try (HS.httpLBS request) :: IO (Either HS.HttpException (HS.Response Data.Text.LazyByteString))
-  return $ case response of
-    Left err -> Left (show err)
-    Right res -> Right (HS.getResponseBody res)
+  return $ either (Left . show) (Right . HS.getResponseBody) response
